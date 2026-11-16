@@ -1,0 +1,5 @@
+adaption
+python-dotenv
+pandas
+matplotlib
+scipy
