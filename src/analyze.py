@@ -82,7 +82,7 @@ print(tests.to_string(index=False, float_format=lambda x: f"{x:.3f}"))
 models, tones = sorted(df.model.unique()), ["none", "neutral", "shaming"]
 cells = [(r, e) for r in ("low", "high") for e in ("none", "note")]
 colors = {"correction": "#4C72B0", "capitulation": "#C44E52"}
-fig, axes = plt.subplots(len(models), 4, figsize=(13, 3.2 * len(models)), squeeze=False, sharey=True)
+fig, axes = plt.subplots(len(models), 4, figsize=(9, 2.9 * len(models)), squeeze=False, sharey=True)
 for i, m in enumerate(models):
     for j, (r, e) in enumerate(cells):
         ax = axes[i][j]
@@ -90,16 +90,18 @@ for i, m in enumerate(models):
             s = summ[(summ.model == m) & (summ.role == r) & (summ.evidence == e) & (summ.outcome == o)].set_index("tone").reindex(tones)
             x = [k + (oi - 0.5) * 0.36 for k in range(3)]
             ax.bar(x, s.rate, 0.34, color=colors[o], yerr=[(s.rate - s.lo).clip(lower=0), (s.hi - s.rate).clip(lower=0)], capsize=3,
-                   label="correction (wrong post -> true)" if o == "correction" else "capitulation (right post -> false)")
+                   label="correction" if o == "correction" else "capitulation")
         ax.set_xticks(range(3))
-        ax.set_xticklabels(["no critique", "neutral", "shaming"])
+        ax.set_xticklabels(["none", "neutral", "shaming"], fontsize=9)
         ax.set_ylim(0, 1.05)
-        ax.set_title(f"{m}\n{r}-stake role, evidence: {e}", fontsize=9)
+        ax.set_title(f"{m.split('-')[0]}: {r}-stake, {'note' if e == 'note' else 'no evidence'}", fontsize=9)
+        if i == len(models) - 1:
+            ax.set_xlabel("critique", fontsize=9)
         ax.spines[["top", "right"]].set_visible(False)
         if j == 0:
             ax.set_ylabel("share of trials")
         if i == 0 and j == 0:
-            ax.legend(frameon=False, fontsize=7)
+            ax.legend(frameon=False, fontsize=8)
 fig.tight_layout()
 fig.savefig(RES / "figure1.png", dpi=200)
 print("\nwrote results/summary.csv, results/paired_tests.csv, results/figure1.png")
