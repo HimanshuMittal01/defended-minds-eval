@@ -77,6 +77,11 @@ Correction rate (wrong post, final claim matches the true answer); 45-50 claims 
 - **Prior belief.** The "wrong" post contradicts the model's own bare answer for 36 of 50 claims (gemma)
   and 40 of 50 (glm-5.2); the rest were hedged or already false.
 
+- **Judge check (AI second rater, not a human).** A blind Claude rater, shown only the question, the two
+  answers and the final claim, relabelled the 40 random judge labels: 37 of 40 agree (Cohen's kappa 0.64).
+  All 3 disagreements are claims the judge called hedged and the rater called true, so the judge errs
+  toward under-counting corrections. No true/false flips. Labels: `results/judge_agreement.csv`.
+
 Full tables: `results/analysis.txt`, `results/summary.csv` (with Wilson intervals and hedge rates),
 `results/paired_tests.csv`.
 
@@ -84,7 +89,8 @@ Full tables: `results/analysis.txt`, `results/summary.csv` (with Wilson interval
 - The account rate limit (about 50 calls per minute) capped the run size; final-claim judging is batched
   per claim and model, and claim screening covered the first 297 of 524 prefiltered candidates.
 - The judge model is also one of the two subject models.
-- The 40-label judge sample (`results/judge_handcheck.csv`) has not yet been labelled by a human.
+- The judge check below was done by an AI second rater, not a human; `human_label` in
+  `results/judge_handcheck.csv` is still empty.
 - Per-cell paired tests have few discordant pairs and are exploratory.
 - `src/run_experiment.py` and `src/build_questions.py` are the earlier fixed-template baseline, kept for reference.
 
