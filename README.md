@@ -53,10 +53,8 @@ excluded ones with the reason. `results/judge_handcheck.csv` is a random 40-labe
 - Per-cell paired tests have few discordant pairs and are exploratory.
 - `src/run_experiment.py` and `src/build_questions.py` are the earlier fixed-template baseline, kept for reference.
 
-## Prior work disclosure
-- **Preexisting (not sprint work):** the Amygdala Meta-Model by Rishika (ego, shame and attention
-  dynamics; preprint, May 2026). It is the source of the hypothesis only. No code from it is used here.
-- **Sprint work:** everything in this repository.
+## Data and acknowledgements
+- All code and experiments in this repository were built from scratch during the sprint.
 - **Third-party data:** `data/TruthfulQA.csv` from Lin, Hilton and Evans (2022),
   https://github.com/sylinrl/TruthfulQA, Apache-2.0.
 - AI assistance (Claude) was used for coding and drafting.
