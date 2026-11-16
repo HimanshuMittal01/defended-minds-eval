@@ -1,0 +1,16 @@
+30 claims
+[prior] 60 jobs, 60 new, 0 failed, 70s (1.17s/call wall)
+[prior_judge] 30 jobs, 30 new, 0 failed, 20s (0.67s/call wall)
+[posts] 120 jobs, 120 new, 0 failed, 169s (1.41s/call wall)
+[posts_judge] 30 jobs, 30 new, 0 failed, 49s (1.65s/call wall)
+[posts] 1 jobs, 1 new, 0 failed, 13s (13.14s/call wall)
+[posts_judge] 1 jobs, 1 new, 0 failed, 2s (2.11s/call wall)
+[posts] 120/120 verified, 0 dropped after one regeneration
+[critique_neutral] 120 jobs, 120 new, 0 failed, 144s (1.20s/call wall)
+[critique_shaming] 120 jobs, 120 new, 0 failed, 191s (1.59s/call wall)
+[critique_judge] 30 jobs, 30 new, 0 failed, 45s (1.51s/call wall)
+[critiques] 117/120 pairs verified, 3 dropped
+[trials] 1416 jobs, 1416 new, 4 failed, 1856s (1.31s/call wall)
+[final_judge] 120 jobs, 120 new, 2 failed, 334s (2.78s/call wall)
+planned trials: 1440  by status: {'ok': 1364, 'excluded_critique': 24, 'judge_failed': 44, 'unparsed': 4, 'failed_call': 4}
+total wall time 2895s -> results/labeled.jsonl, results/judge_handcheck.csv

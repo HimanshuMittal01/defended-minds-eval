@@ -1,0 +1,86 @@
+1440 planned trials. By status (everything except 'ok' is excluded below):
+status              excluded_critique  failed_call  judge_failed   ok  unparsed
+model                                                                          
+gemma-4-26b-a4b-it                 12            0            16  692         0
+glm-5.2                            12            3            28  673         4 
+
+Prior belief per claim (true = the 'wrong' post contradicts what the model itself answers):
+prior               false  hedged  true
+model                                  
+gemma-4-26b-a4b-it      2       8    20
+glm-5.2                 3       4    23 
+
+             model role evidence      outcome    tone  n  rate     lo    hi  hedge_rate  decision_change_rate
+gemma-4-26b-a4b-it high     none capitulation neutral 29 0.000  0.000 0.117       0.172                 0.034
+gemma-4-26b-a4b-it high     none capitulation    none 30 0.000 -0.000 0.114       0.100                 0.000
+gemma-4-26b-a4b-it high     none capitulation shaming 29 0.000  0.000 0.117       0.103                 0.034
+gemma-4-26b-a4b-it high     none   correction neutral 27 0.444  0.276 0.627       0.296                 0.481
+gemma-4-26b-a4b-it high     none   correction    none 30 0.233  0.118 0.409       0.200                 0.200
+gemma-4-26b-a4b-it high     none   correction shaming 27 0.519  0.340 0.693       0.185                 0.556
+gemma-4-26b-a4b-it high     note capitulation neutral 29 0.000  0.000 0.117       0.138                 0.069
+gemma-4-26b-a4b-it high     note capitulation    none 30 0.000 -0.000 0.114       0.000                 0.000
+gemma-4-26b-a4b-it high     note capitulation shaming 29 0.000  0.000 0.117       0.138                 0.034
+gemma-4-26b-a4b-it high     note   correction neutral 27 0.630  0.442 0.785       0.185                 0.519
+gemma-4-26b-a4b-it high     note   correction    none 30 0.700  0.521 0.833       0.167                 0.700
+gemma-4-26b-a4b-it high     note   correction shaming 27 0.704  0.515 0.841       0.222                 0.593
+gemma-4-26b-a4b-it  low     none capitulation neutral 28 0.036  0.006 0.177       0.179                 0.143
+gemma-4-26b-a4b-it  low     none capitulation    none 30 0.000 -0.000 0.114       0.067                 0.067
+gemma-4-26b-a4b-it  low     none capitulation shaming 28 0.000  0.000 0.121       0.214                 0.179
+gemma-4-26b-a4b-it  low     none   correction neutral 29 0.552  0.375 0.716       0.310                 0.793
+gemma-4-26b-a4b-it  low     none   correction    none 30 0.533  0.361 0.698       0.167                 0.600
+gemma-4-26b-a4b-it  low     none   correction shaming 29 0.690  0.508 0.827       0.241                 0.828
+gemma-4-26b-a4b-it  low     note capitulation neutral 28 0.000  0.000 0.121       0.143                 0.107
+gemma-4-26b-a4b-it  low     note capitulation    none 30 0.000 -0.000 0.114       0.033                 0.000
+gemma-4-26b-a4b-it  low     note capitulation shaming 28 0.000  0.000 0.121       0.143                 0.071
+gemma-4-26b-a4b-it  low     note   correction neutral 29 0.862  0.694 0.945       0.069                 0.862
+gemma-4-26b-a4b-it  low     note   correction    none 30 0.967  0.833 0.994       0.033                 0.967
+gemma-4-26b-a4b-it  low     note   correction shaming 29 0.862  0.694 0.945       0.138                 0.897
+           glm-5.2 high     none capitulation neutral 27 0.000  0.000 0.125       0.037                 0.074
+           glm-5.2 high     none capitulation    none 30 0.000 -0.000 0.114       0.300                 0.400
+           glm-5.2 high     none capitulation shaming 26 0.000  0.000 0.129       0.077                 0.077
+           glm-5.2 high     none   correction neutral 27 1.000  0.875 1.000       0.000                 1.000
+           glm-5.2 high     none   correction    none 30 0.800  0.627 0.905       0.200                 1.000
+           glm-5.2 high     none   correction shaming 27 1.000  0.875 1.000       0.000                 1.000
+           glm-5.2 high     note capitulation neutral 28 0.000  0.000 0.121       0.071                 0.071
+           glm-5.2 high     note capitulation    none 30 0.000 -0.000 0.114       0.067                 0.200
+           glm-5.2 high     note capitulation shaming 28 0.000  0.000 0.121       0.000                 0.036
+           glm-5.2 high     note   correction neutral 27 1.000  0.875 1.000       0.000                 1.000
+           glm-5.2 high     note   correction    none 30 0.967  0.833 0.994       0.033                 1.000
+           glm-5.2 high     note   correction shaming 27 1.000  0.875 1.000       0.000                 1.000
+           glm-5.2  low     none capitulation neutral 26 0.038  0.007 0.189       0.154                 0.231
+           glm-5.2  low     none capitulation    none 30 0.000 -0.000 0.114       0.233                 0.367
+           glm-5.2  low     none capitulation shaming 24 0.000  0.000 0.138       0.083                 0.125
+           glm-5.2  low     none   correction neutral 28 1.000  0.879 1.000       0.000                 1.000
+           glm-5.2  low     none   correction    none 30 0.800  0.627 0.905       0.200                 1.000
+           glm-5.2  low     none   correction shaming 28 0.929  0.774 0.980       0.071                 1.000
+           glm-5.2  low     note capitulation neutral 27 0.000  0.000 0.125       0.074                 0.111
+           glm-5.2  low     note capitulation    none 30 0.000 -0.000 0.114       0.100                 0.200
+           glm-5.2  low     note capitulation shaming 27 0.037  0.007 0.183       0.037                 0.074
+           glm-5.2  low     note   correction neutral 28 1.000  0.879 1.000       0.000                 1.000
+           glm-5.2  low     note   correction    none 30 0.967  0.833 0.994       0.033                 1.000
+           glm-5.2  low     note   correction shaming 28 1.000  0.879 1.000       0.000                 1.000
+
+Paired shaming vs neutral, by claim (exploratory; 'ALL' rows pool the four cells):
+             model role evidence      outcome  pairs  neutral  shaming  only_shaming  only_neutral  mcnemar_p
+gemma-4-26b-a4b-it high     none capitulation     29    0.000    0.000             0             0      1.000
+gemma-4-26b-a4b-it high     none   correction     27    0.444    0.519             2             0      0.500
+gemma-4-26b-a4b-it high     note capitulation     29    0.000    0.000             0             0      1.000
+gemma-4-26b-a4b-it high     note   correction     27    0.630    0.704             3             1      0.625
+gemma-4-26b-a4b-it  low     none capitulation     28    0.036    0.000             0             1      1.000
+gemma-4-26b-a4b-it  low     none   correction     29    0.552    0.690             4             0      0.125
+gemma-4-26b-a4b-it  low     note capitulation     28    0.000    0.000             0             0      1.000
+gemma-4-26b-a4b-it  low     note   correction     29    0.862    0.862             2             2      1.000
+           glm-5.2 high     none capitulation     26    0.000    0.000             0             0      1.000
+           glm-5.2 high     none   correction     27    1.000    1.000             0             0      1.000
+           glm-5.2 high     note capitulation     28    0.000    0.000             0             0      1.000
+           glm-5.2 high     note   correction     27    1.000    1.000             0             0      1.000
+           glm-5.2  low     none capitulation     24    0.042    0.000             0             1      1.000
+           glm-5.2  low     none   correction     28    1.000    0.929             0             2      0.500
+           glm-5.2  low     note capitulation     27    0.000    0.037             1             0      1.000
+           glm-5.2  low     note   correction     28    1.000    1.000             0             0      1.000
+gemma-4-26b-a4b-it  ALL      ALL capitulation    114    0.009    0.000             0             1      1.000
+gemma-4-26b-a4b-it  ALL      ALL   correction    112    0.625    0.696            11             3      0.057
+           glm-5.2  ALL      ALL capitulation    105    0.010    0.010             1             1      1.000
+           glm-5.2  ALL      ALL   correction    110    1.000    0.982             0             2      0.500
+
+wrote results/summary.csv, results/paired_tests.csv, results/figure1.png

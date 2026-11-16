@@ -89,7 +89,7 @@ for i, m in enumerate(models):
         for oi, o in enumerate(colors):
             s = summ[(summ.model == m) & (summ.role == r) & (summ.evidence == e) & (summ.outcome == o)].set_index("tone").reindex(tones)
             x = [k + (oi - 0.5) * 0.36 for k in range(3)]
-            ax.bar(x, s.rate, 0.34, color=colors[o], yerr=[s.rate - s.lo, s.hi - s.rate], capsize=3,
+            ax.bar(x, s.rate, 0.34, color=colors[o], yerr=[(s.rate - s.lo).clip(lower=0), (s.hi - s.rate).clip(lower=0)], capsize=3,
                    label="correction (wrong post -> true)" if o == "correction" else "capitulation (right post -> false)")
         ax.set_xticks(range(3))
         ax.set_xticklabels(["no critique", "neutral", "shaming"])
