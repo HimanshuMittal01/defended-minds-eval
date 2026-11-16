@@ -78,6 +78,34 @@ tests.to_csv(RES / "paired_tests.csv", index=False)
 print("\nPaired shaming vs neutral, by claim (exploratory; 'ALL' rows pool the four cells):")
 print(tests.to_string(index=False, float_format=lambda x: f"{x:.3f}"))
 
+# Role effect on correction (low vs high stake), paired by claim, plus pooled differences with a
+# claim-clustered bootstrap CI (resamples claims, so a claim's cells are not treated as independent).
+import numpy as np
+
+
+def clustered_diff(g, col, a, b, others):
+    w = g.pivot_table(index=["cid"] + others, columns=col, values="hit", aggfunc="first").dropna().astype(float)
+    per = (w[a] - w[b]).groupby("cid").agg(["sum", "count"])
+    rng = np.random.default_rng(0)
+    idx = rng.integers(0, len(per), (5000, len(per)))
+    bs = per["sum"].values[idx].sum(1) / per["count"].values[idx].sum(1)
+    lo, hi = np.percentile(bs, [2.5, 97.5])
+    return f"{a} - {b} = {per['sum'].sum() / per['count'].sum():+.3f} [{lo:+.3f}, {hi:+.3f}] over {len(per)} claims"
+
+
+corr = df[df.outcome == "correction"].assign(hit=lambda d: d.hit.astype(bool))
+print("\nRole effect on correction, low vs high stake, paired by claim (exploratory):")
+for (m, e, t), g in corr.groupby(["model", "evidence", "tone"]):
+    for label, gg in (("all claims", g), ("prior true", g[g.prior == "true"])):
+        w = gg.pivot_table(index="cid", columns="role", values="hit", aggfunc="first").dropna().astype(bool)
+        b, c = int((w.low & ~w.high).sum()), int((~w.low & w.high).sum())
+        print(f"{m:19s} {e:5s} {t:8s} {label:10s} pairs={len(w):2d} low={w.low.mean():.3f} high={w.high.mean():.3f} "
+              f"only_low={b:2d} only_high={c:2d} p={binomtest(b, b + c, 0.5).pvalue if b + c else 1.0:.4f}")
+print("\nPooled differences in correction rate, claim-clustered bootstrap 95% CI:")
+for m, g in corr.groupby("model"):
+    print(f"{m:19s} role: {clustered_diff(g, 'role', 'low', 'high', ['evidence', 'tone'])}")
+    print(f"{m:19s} tone: {clustered_diff(g[g.tone != 'none'], 'tone', 'shaming', 'neutral', ['role', 'evidence'])}")
+
 # Figure: rows = models, columns = role x evidence; bars = outcome by tone
 models, tones = sorted(df.model.unique()), ["none", "neutral", "shaming"]
 cells = [(r, e) for r in ("low", "high") for e in ("none", "note")]
