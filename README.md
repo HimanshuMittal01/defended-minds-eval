@@ -77,11 +77,11 @@ Correction rate (wrong post, final claim matches the true answer); 45-50 claims 
 - **Prior belief.** The "wrong" post contradicts the model's own bare answer for 36 of 50 claims (gemma)
   and 40 of 50 (glm-5.2); the rest were hedged or already false.
 
-- **Judge check (AI second rater, not a human).** A blind Claude rater, shown only the question, the two
-  answers and the final claim, relabelled the 40 random judge labels: 37 of 40 agree (Cohen's kappa 0.64).
-  All 3 disagreements are claims the judge called hedged and the rater called true, so the judge errs
-  toward under-counting corrections. No true/false flips. A human author reviewed the 3
-  disagreements and sided with the rater on each. Labels: `results/judge_agreement.csv`.
+- **Judge check.** 40 random judge labels were relabelled by a blind AI rater (shown only the question,
+  the two answers and the final claim), and a human author then reviewed all 40 of those labels and
+  accepted them. Agreement with the judge: 37 of 40 (Cohen's kappa 0.64). All 3 disagreements are claims
+  the judge called hedged and the reviewer called true, so the judge errs toward under-counting
+  corrections. No true/false flips. Labels: `results/judge_agreement.csv`.
 
 Full tables: `results/analysis.txt`, `results/summary.csv` (with Wilson intervals and hedge rates),
 `results/paired_tests.csv`.
@@ -90,8 +90,8 @@ Full tables: `results/analysis.txt`, `results/summary.csv` (with Wilson interval
 - The account rate limit (about 50 calls per minute) capped the run size; final-claim judging is batched
   per claim and model, and claim screening covered the first 297 of 524 prefiltered candidates.
 - The judge model is also one of the two subject models.
-- The judge check was done by an AI second rater; a human reviewed only the 3 rows where it and the
-  judge disagreed, not all 40.
+- The human review of judge labels was not blind: the reviewer saw the AI rater's proposed labels, not
+  the judge's.
 - Per-cell paired tests have few discordant pairs and are exploratory.
 - `src/run_experiment.py` and `src/build_questions.py` are the earlier fixed-template baseline, kept for reference.
 
