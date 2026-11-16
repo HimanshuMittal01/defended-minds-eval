@@ -1,4 +1,4 @@
-# Defended Minds: Do Language Models Cave or Dig In When Shamed?
+# Defended Minds: Persona Stakes, Not Critic Tone, Suppress a Model's Self-Correction
 
 Apart Research AI x Epistemics Sprint (13-15 Nov 2026). Team: Rishika Rai, Himanshu Mittal.
 
