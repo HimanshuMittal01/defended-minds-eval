@@ -46,10 +46,45 @@ Every stage is cached to its own `results/<stage>.jsonl` with the full prompt an
 re-running skips finished calls. `results/labeled.jsonl` has one row per planned trial, including
 excluded ones with the reason. `results/judge_handcheck.csv` is a random 40-label sample for human review.
 
+## Results (50 claims, 2 subject models)
+2,311 of 2,400 planned trials have a judge label. The 89 exclusions: 64 from 8 of 200 critique pairs the
+judge rejected, 16 where the judge returned no label, 6 replies with no `Final claim` line, 3 failed calls.
+
+![Correction and capitulation by tone, role and evidence](results/figure1.png)
+
+Correction rate (wrong post, final claim matches the true answer); 45-50 claims per cell:
+
+| Model | Role | Evidence | No critique | Neutral | Shaming |
+|---|---|---|---|---|---|
+| gemma-4-26b | low-stake | none | 50% | 62% | 66% |
+| gemma-4-26b | low-stake | note | 96% | 83% | 85% |
+| gemma-4-26b | high-stake | none | 18% | 48% | 54% |
+| gemma-4-26b | high-stake | note | 72% | 67% | 72% |
+| glm-5.2 | low-stake | none | 84% | 98% | 94% |
+| glm-5.2 | low-stake | note | 96% | 100% | 98% |
+| glm-5.2 | high-stake | none | 84% | 100% | 98% |
+| glm-5.2 | high-stake | note | 98% | 100% | 100% |
+
+- **Tone: no detectable effect.** Shaming vs neutral, paired by claim, is not significant in any of the
+  16 role x evidence x outcome cells (all McNemar p >= 0.375). Pooled over cells: gemma 69% vs 65%
+  (17 vs 9 discordant pairs, p = 0.17); glm-5.2 97% vs 99% (p = 0.13). Pooled pairs are not independent.
+- **Role matters for the smaller model.** With no evidence and no critique, gemma corrects a wrong post
+  18% of the time in the high-stake role against 50% in the low-stake role; the gap persists under critique.
+- **Evidence is the strongest lever.** The fact-check note lifts gemma's unprompted correction from 18%
+  to 72% (high-stake) and from 50% to 96% (low-stake).
+- **Capitulation is rare.** 0-4% in every cell for both models. Models hedge instead of adopting the
+  false claim; hedge rates reach 28% (glm-5.2, high-stake, no evidence, no critique).
+- **Prior belief.** The "wrong" post contradicts the model's own bare answer for 36 of 50 claims (gemma)
+  and 40 of 50 (glm-5.2); the rest were hedged or already false.
+
+Full tables: `results/analysis.txt`, `results/summary.csv` (with Wilson intervals and hedge rates),
+`results/paired_tests.csv`.
+
 ## Limitations
 - The account rate limit (about 50 calls per minute) capped the run size; final-claim judging is batched
   per claim and model, and claim screening covered the first 297 of 524 prefiltered candidates.
 - The judge model is also one of the two subject models.
+- The 40-label judge sample (`results/judge_handcheck.csv`) has not yet been labelled by a human.
 - Per-cell paired tests have few discordant pairs and are exploratory.
 - `src/run_experiment.py` and `src/build_questions.py` are the earlier fixed-template baseline, kept for reference.
 
